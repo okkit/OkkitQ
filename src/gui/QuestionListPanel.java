@@ -4,7 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import gui.layout.QPanel;
-import quizlogic.FakeDataDeliverer;
+import persistence.serialization.QuizDataManager;
 
 public class QuestionListPanel extends QPanel{
 	
@@ -21,7 +21,7 @@ public class QuestionListPanel extends QPanel{
 
 	private void questionWasSelected() {
 		
-		delegate.receiveSelection((new FakeDataDeliverer()).getRandomQuestion());
+		delegate.receiveSelection((new QuizDataManager()).getRandomQuestion());
 	}
 	
 	

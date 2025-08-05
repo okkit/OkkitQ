@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 
 import gui.layout.QPanel;
 import quizlogic.Answer;
-import quizlogic.FakeDataDeliverer;
 import quizlogic.Question;
 
 public class QuestionPanel extends QPanel implements ListSelectionDelegate {
@@ -32,7 +31,6 @@ public class QuestionPanel extends QPanel implements ListSelectionDelegate {
 
 	int answersCount = 4;
 
-	FakeDataDeliverer fdd = new FakeDataDeliverer();
 
 	public QuestionPanel() {
 		super();

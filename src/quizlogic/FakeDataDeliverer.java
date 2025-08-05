@@ -11,19 +11,23 @@ public class FakeDataDeliverer {
 		super();
 		createThemes(2);
 	}
-	
-	public Question getRandomQuestion(){
-		
+
+	public ArrayList<Thema> getThemes() {
+		return themes;
+	}
+
+	public Question getRandomQuestion() {
+
 		Random random = new Random();
-		
-		// Zufälliges Thema aus der Liste auswählen		
+
+		// Zufälliges Thema aus der Liste auswählen
 		int index = random.nextInt(themes.size());
 		Thema thema = themes.get(index);
-		
+
 		// Aus der Liste der Fragen zum ausgewählten Thema eine Frage auswählen.
 		index = random.nextInt(thema.getQuestions().size());
 		Question que = thema.getQuestions().get(index);
-		
+
 		return que;
 	}
 
@@ -38,8 +42,7 @@ public class FakeDataDeliverer {
 			th.setId(i);
 
 			th.setTitle("Title des Themas  " + i);
-			th.setText(
-					"Tementest blabla bla" + i);
+			th.setText("Tementest blabla bla" + i);
 
 			createQuestionsFor(th);
 			themes.add(th);

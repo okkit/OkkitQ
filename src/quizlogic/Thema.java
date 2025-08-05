@@ -21,7 +21,7 @@ public class Thema extends QObject {
 	public String toString() {
 		StringBuilder info = new StringBuilder();
 
-		info.append("\nThema:");
+		info.append("\nThema with id " + getId() + ":");
 		info.append("\n  Title: " + title);
 		info.append("\n  Text: " + text);
 		info.append("\n\n  Fragen:");

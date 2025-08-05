@@ -4,8 +4,12 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
+import quizlogic.FakeDataDeliverer;
+
 public class QuizPanel extends JPanel{
 
+	FakeDataDeliverer fdd = new FakeDataDeliverer();
+	
 	public QuizPanel() {
 		super();
 		

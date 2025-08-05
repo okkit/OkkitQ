@@ -1,11 +1,15 @@
 package quizlogic;
 
+import java.io.Serializable;
+
 /**
  * TODO java doc, with AI?
  */
-public class QObject {
+public class QObject implements Serializable{
 	
-	private int id;
+	protected static final long serialVersionUID = 1L;
+	
+	private int id = -1;
 
 	public int getId() {
 		return id;
