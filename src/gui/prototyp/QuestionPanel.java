@@ -3,7 +3,7 @@
  * @André Lenders
  * @author ValentinaTikko
  */
-package gui;
+package gui.prototyp;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -15,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import gui.layout.QPanel;
 import quizlogic.Answer;
 import quizlogic.Question;
 

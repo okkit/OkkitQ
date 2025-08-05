@@ -5,14 +5,14 @@ import java.util.Random;
 
 public class FakeDataDeliverer {
 
-	public ArrayList<Thema> themes;
+	public ArrayList<Theme> themes;
 
 	public FakeDataDeliverer() {
 		super();
 		createThemes(2);
 	}
 
-	public ArrayList<Thema> getThemes() {
+	public ArrayList<Theme> getThemes() {
 		return themes;
 	}
 
@@ -22,7 +22,7 @@ public class FakeDataDeliverer {
 
 		// Zufälliges Thema aus der Liste auswählen
 		int index = random.nextInt(themes.size());
-		Thema thema = themes.get(index);
+		Theme thema = themes.get(index);
 
 		// Aus der Liste der Fragen zum ausgewählten Thema eine Frage auswählen.
 		index = random.nextInt(thema.getQuestions().size());
@@ -33,12 +33,12 @@ public class FakeDataDeliverer {
 
 	private void createThemes(int count) {
 
-		themes = new ArrayList<Thema>();
-		Thema th;
+		themes = new ArrayList<Theme>();
+		Theme th;
 
 		for (int i = 0; i < count; i++) {
 
-			th = new Thema();
+			th = new Theme();
 			th.setId(i);
 
 			th.setTitle("Title des Themas  " + i);
@@ -50,7 +50,7 @@ public class FakeDataDeliverer {
 
 	}
 
-	private void createQuestionsFor(Thema th) {
+	private void createQuestionsFor(Theme th) {
 
 		Question q;
 

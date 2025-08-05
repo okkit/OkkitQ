@@ -1,4 +1,4 @@
-package gui;
+package gui.prototyp;
 
 import quizlogic.Question;
 

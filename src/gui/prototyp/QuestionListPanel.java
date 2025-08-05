@@ -1,9 +1,8 @@
-package gui;
+package gui.prototyp;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import gui.layout.QPanel;
 import persistence.serialization.QuizDataManager;
 
 public class QuestionListPanel extends QPanel{

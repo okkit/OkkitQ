@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import persistence.QuizDataInterface;
 import quizlogic.Answer;
 import quizlogic.Question;
-import quizlogic.Thema;
+import quizlogic.Theme;
 
 public class QuizDataManager implements QuizDataInterface {
 
@@ -25,10 +25,10 @@ public class QuizDataManager implements QuizDataInterface {
 	}
 
 	@Override
-	public ArrayList<Thema> getAllThemes() {
+	public ArrayList<Theme> getAllThemes() {
 		FileInputStream fileInputStream;
-		Thema theme;
-		ArrayList<Thema> list = new ArrayList<>();
+		Theme theme;
+		ArrayList<Theme> list = new ArrayList<>();
 		try {
 			File folder = new File(FOLDER);
 
@@ -37,7 +37,7 @@ public class QuizDataManager implements QuizDataInterface {
 
 					fileInputStream = new FileInputStream(fileEntry);
 					ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-					theme = (Thema) objectInputStream.readObject();
+					theme = (Theme) objectInputStream.readObject();
 					list.add(theme);
 					objectInputStream.close();
 				}
@@ -49,7 +49,7 @@ public class QuizDataManager implements QuizDataInterface {
 	}
 
 	@Override
-	public ArrayList<Question> getQuestionsFor(Thema th) {
+	public ArrayList<Question> getQuestionsFor(Theme th) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -61,7 +61,7 @@ public class QuizDataManager implements QuizDataInterface {
 	}
 
 	@Override
-	public String saveTheme(Thema th) {
+	public String saveTheme(Theme th) {
 		FileOutputStream fileOutputStream;
 		try {
 			if (th.getId() == -1)
@@ -69,7 +69,8 @@ public class QuizDataManager implements QuizDataInterface {
 
 			fileOutputStream = new FileOutputStream(FILE + th.getId());
 
-			ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+			ObjectOutputStream objectOutputStream = 
+					new ObjectOutputStream(fileOutputStream);
 			objectOutputStream.writeObject(th);
 			objectOutputStream.flush();
 			objectOutputStream.close();
@@ -80,7 +81,7 @@ public class QuizDataManager implements QuizDataInterface {
 	}
 
 	@Override
-	public String deleteTheme(Thema th) {
+	public String deleteTheme(Theme th) {
 		File file = new File(FILE + th.getId());
 		file.delete();
 		return null;

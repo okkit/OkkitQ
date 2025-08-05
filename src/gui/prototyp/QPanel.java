@@ -3,7 +3,7 @@
  * @André Lenders
  * @author ValentinaTikko
  */
-package gui.layout;
+package gui.prototyp;
 
 import java.awt.Component;
 import java.awt.GridBagConstraints;

@@ -7,10 +7,10 @@ public class Question extends QObject {
 	private String title;
 	private String text;
 
-	private Thema thema;
+	private Theme thema;
 	private ArrayList<Answer> answers;
 
-	public Question(Thema thema) {
+	public Question(Theme thema) {
 		super();
 		this.thema = thema;
 	}
@@ -29,11 +29,11 @@ public class Question extends QObject {
 		answers.add(a);
 	}
 
-	public Thema getThema() {
+	public Theme getThema() {
 		return thema;
 	}
 
-	public void setThema(Thema thema) {
+	public void setThema(Theme thema) {
 		this.thema = thema;
 	}
 

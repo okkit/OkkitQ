@@ -2,7 +2,7 @@ package quizlogic;
 
 import java.util.ArrayList;
 
-public class Thema extends QObject {
+public class Theme extends QObject {
 
 	private String title;
 	private String text;
