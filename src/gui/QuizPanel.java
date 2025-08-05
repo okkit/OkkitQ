@@ -4,11 +4,11 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import quizlogic.FakeDataDeliverer;
+import persistence.serialization.QuizDataManager;
 
 public class QuizPanel extends JPanel{
 
-	FakeDataDeliverer fdd = new FakeDataDeliverer();
+	QuizDataManager fdd = new QuizDataManager();
 	
 	public QuizPanel() {
 		super();

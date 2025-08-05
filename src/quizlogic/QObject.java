@@ -3,7 +3,8 @@ package quizlogic;
 import java.io.Serializable;
 
 /**
- * TODO java doc, with AI?
+ * Die MutterKlasse aller Objekte in der busineslogic-Schicht werden serialisierbar,<br
+ * d.h. implementes Serializable und serialVersionUID
  */
 public class QObject implements Serializable{
 	
@@ -19,6 +20,4 @@ public class QObject implements Serializable{
 		this.id = id;
 	}
 	
-	
-
 }
