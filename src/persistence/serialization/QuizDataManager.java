@@ -31,6 +31,8 @@ public class QuizDataManager implements QuizDataInterface {
 		ArrayList<Theme> list = new ArrayList<>();
 		try {
 			File folder = new File(FOLDER);
+			if (folder.list() == null)
+				return null;
 
 			for (File fileEntry : folder.listFiles()) {
 				if (!fileEntry.isDirectory()) {
@@ -69,27 +71,26 @@ public class QuizDataManager implements QuizDataInterface {
 
 			fileOutputStream = new FileOutputStream(FILE + th.getId());
 
-			ObjectOutputStream objectOutputStream = 
-					new ObjectOutputStream(fileOutputStream);
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 			objectOutputStream.writeObject(th);
 			objectOutputStream.flush();
 			objectOutputStream.close();
 		} catch (IOException e) {
 			return e.getMessage();
 		}
-		return null;
+		return "Tas Thema wurde gespeichert";
 	}
 
 	@Override
 	public String deleteTheme(Theme th) {
 		File file = new File(FILE + th.getId());
 		file.delete();
-		return null;
+		return "Tas Thema wurde gelöscht";
 	}
 
 	@Override
 	public String saveQuestion(Question q) {
-		
+
 		return saveTheme(q.getThema());
 	}
 

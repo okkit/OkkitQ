@@ -8,17 +8,17 @@ import javax.swing.JPanel;
 
 import persistence.QuizDataInterface;
 import persistence.serialization.QuizDataManager;
+import quizlogic.Theme;
 
 /**
  * 
  */
-public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, ThemeSelectionDelegate{
+public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, ThemeSelectionDelegate {
 
+	ThemeListPanel panelThemenList;
+	ThemeEditPanel panelThemeEdit;
+	ThemeButtonsPanel panelActions;
 
-	ThemeListPanel panelThemenListe; 
-	ThemeEditPanel panelNeuesThema;
-	ThemeButtonsPanel panelAktionen;
-	
 	QuizDataInterface manager = new QuizDataManager();
 
 	/**
@@ -34,10 +34,14 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	 * Initialisiert die Felder (also die Panels)
 	 */
 	void initPanels() {
-		 panelThemenListe = new ThemeListPanel(manager.getAllThemes());
-		 
-		 panelNeuesThema = new ThemeEditPanel();
-		 panelAktionen = new ThemeButtonsPanel();
+		panelThemenList = new ThemeListPanel(manager.getAllThemes());
+		System.out.println(manager.getAllThemes());
+		panelThemenList.setDelegate(this);
+
+		panelThemeEdit = new ThemeEditPanel();
+
+		panelActions = new ThemeButtonsPanel();
+		panelActions.setDelegate(this);
 	}
 
 	/**
@@ -54,12 +58,12 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 		gbc.weighty = 1.0;
 		gbc.insets = new Insets(15, 10, 0, 5);
 		gbc.fill = GridBagConstraints.BOTH;
-		add(panelNeuesThema, gbc);
+		add(panelThemeEdit, gbc);
 
 		// Rechtes Panel
 		gbc.gridx = 1;
 		gbc.insets = new Insets(15, 5, 0, 10);
-		add(panelThemenListe, gbc);
+		add(panelThemenList, gbc);
 
 		// Unteres Panel
 		gbc.gridx = 0;
@@ -68,31 +72,43 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 		gbc.weighty = 0.0;
 		gbc.insets = new Insets(5, 10, 10, 10);
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		add(panelAktionen, gbc);
+		add(panelActions, gbc);
 	}
 
-
+	void refreschPanelsWith(String msg, Theme th, boolean refreshListData) {
+		panelActions.showMessage(msg);
+		panelThemeEdit.setThemeToEdit(th);
+		if (refreshListData)
+			panelThemenList.refreshListData(manager.getAllThemes());
+	}
+	
 	@Override
 	public void saveTheme() {
-		// TODO Auto-generated method stub
-		
+		Theme theme = panelThemeEdit.getEditedTheme();
+		System.out.println("saveTheme " + theme.getId() + " " +  theme.getText());
+		String msg = manager.saveTheme(theme);
+		System.out.println("saved " + theme.getId() + " " +  theme.getText());
+		refreschPanelsWith(msg, theme, true);
+
 	}
 
 	@Override
 	public void deleteTheme() {
-		// TODO Auto-generated method stub
-		
+		String msg = manager.deleteTheme(panelThemeEdit.getEditedTheme());
+		refreschPanelsWith(msg, null, true);
 	}
+
 
 	@Override
 	public void newTheme() {
-		// TODO Auto-generated method stub
-		
+		refreschPanelsWith(null, null, true);
+
 	}
 
 	@Override
-	public void receiveSelection(Object th) {
-		// TODO Auto-generated method stub
-		
+	public void receiveSelection(Theme theme) {
+		panelActions.showMessage(null);
+		panelThemeEdit.setThemeToEdit(theme);
+
 	}
 }

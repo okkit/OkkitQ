@@ -17,54 +17,56 @@ import javax.swing.event.ListSelectionEvent;
 import quizlogic.Theme;
 
 public class ThemeListPanel extends JPanel {
-	
+
+	JList<Theme> jList;
+
 	ThemeSelectionDelegate delegate;
-    JList<Theme> jList;
-    
+
+	public void setDelegate(ThemeSelectionDelegate delegate) {
+		this.delegate = delegate;
+	}
+
 	public ThemeListPanel(ArrayList<Theme> listData) {
 		super();
-		initList(listData);
-	
-        setLayout(new GridBagLayout());
-        setBorder(BorderFactory.createTitledBorder("Themen"));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(6, 6, 6, 6);
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 1.0; gbc.weighty = 1.0;
 
-//        String[] themen = {
-//                "Titel des Themas 1", "Titel des Themas 2", "Titel des Themas 3",
-//                "Titel des Themas 4", "Titel des Themas 5", "Titel des Themas 6",
-//                "Titel des Themas 7", "Titel des Themas 8", "Titel des Themas 9",
-//                "Titel des Themas 10"
-//        };
+		initComponents();
+		fillWithData(listData);
+	}
 
-        jList = new JList<Theme>();
-        jList.setFont(new Font("Serif", Font.PLAIN, 15));
-        JScrollPane scrollPane = new JScrollPane(jList);
-
-        add(scrollPane, gbc);
-    }
-    
-
-	private void initList(ArrayList<Theme> listData) {
-
-		jList = new JList<Theme>(createModel(listData));
+	private void fillWithData(ArrayList<Theme> listData) {
+		jList.setModel(createModel(listData));
 		jList.addListSelectionListener(e -> listItemWasSelected(e));
 		
-		JScrollPane pane = new JScrollPane(jList);
-		add(pane);
 	}
-	
-	public void refreshListData(ArrayList<Theme> listData) {
 
+	void initComponents() {
+		setLayout(new GridBagLayout());
+		setBorder(BorderFactory.createTitledBorder("Themen"));
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.insets = new Insets(6, 6, 6, 6);
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.weightx = 1.0;
+		gbc.weighty = 1.0;
+
+		jList = new JList<Theme>();
+		jList.setFont(new Font("Serif", Font.PLAIN, 15));
+		JScrollPane scrollPane = new JScrollPane(jList);
+
+		add(scrollPane, gbc);
+
+	}
+
+
+	public void refreshListData(ArrayList<Theme> listData) {
 		jList.setModel(createModel(listData));
 	}
 
 	private ListModel<Theme> createModel(ArrayList<Theme> listData) {
 		DefaultListModel<Theme> model = new DefaultListModel<Theme>();
-		for (Theme object : listData) {
-			model.addElement(object);
+		for (Theme th : listData) {
+			model.addElement(th);
 		}
 		return model;
 	}
@@ -74,9 +76,11 @@ public class ThemeListPanel extends JPanel {
 	boolean adjusting = false;
 
 	private void listItemWasSelected(ListSelectionEvent e) {
-		if (adjusting)
-			delegate.receiveSelection(jList.getSelectedValuesList().get(0));
+		System.out.println("model: " + jList.getModel().getElementAt(2));
+		if (adjusting) {
+			delegate.receiveSelection(jList.getSelectedValue());
+			System.out.println(jList.getSelectedIndex());
+		}
 		adjusting = e.getValueIsAdjusting();
 	}
 }
-

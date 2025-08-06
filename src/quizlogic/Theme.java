@@ -19,25 +19,31 @@ public class Theme extends QObject {
 	}
 
 	public String toString() {
+		
+		return getId() + " " + title;
+	}
+	
+	public String getFullInfo() {
 		StringBuilder info = new StringBuilder();
 
 		info.append("\nThema with id " + getId() + ":");
 		info.append("\n  Title: " + title);
 		info.append("\n  Text: " + text);
 		info.append("\n\n  Fragen:");
-		for (Question question : questions) {
+		if (questions != null) {
+			for (Question question : questions) {
 
-			info.append("\n\n    Title: " + question.getTitle());
-			info.append("\n    Text: " + question.getText());
+				info.append("\n\n    Title: " + question.getTitle());
+				info.append("\n    Text: " + question.getText());
 
-			info.append("\n\n    Antworten:");
-			for (Answer a : question.getAnswers()) {
+				info.append("\n\n    Antworten:");
+				for (Answer a : question.getAnswers()) {
 
-				info.append("\n      Text: " + a.getText());
-				info.append("-> " + (a.isCorrect() ? "richtig" : "falsch"));
+					info.append("\n      Text: " + a.getText());
+					info.append("-> " + (a.isCorrect() ? "richtig" : "falsch"));
+				}
 			}
 		}
-
 		return info.toString();
 	}
 

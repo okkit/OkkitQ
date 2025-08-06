@@ -1,7 +1,9 @@
 package gui.okkit;
 
+import quizlogic.Theme;
+
 public interface ThemeSelectionDelegate {
 	
-	void receiveSelection(Object th);
+	void receiveSelection(Theme th);
 
 }

@@ -14,8 +14,12 @@ public class ThemeButtonsPanel extends JPanel {
 	JButton btnSpeichern;
 	JButton btnNeuesThema;
 	JTextField messageArea;
-	
+
 	ThemeActionDelegate delegate;
+
+	public void setDelegate(ThemeActionDelegate delegate) {
+		this.delegate = delegate;
+	}
 
 	public ThemeButtonsPanel() {
 		setLayout(new GridBagLayout());
@@ -34,13 +38,13 @@ public class ThemeButtonsPanel extends JPanel {
 		add(messageArea, gbc);
 
 		// Buttons
-		btnLoeschen = new JButton("Thema LÃ¶schen");
+		btnLoeschen = new JButton("Thema Löschen");
 		btnLoeschen.addActionListener(e -> delegate.deleteTheme());
 		btnSpeichern = new JButton("Speichern");
 		btnSpeichern.addActionListener(e -> delegate.saveTheme());
 		btnNeuesThema = new JButton("Neues Thema");
 		btnNeuesThema.addActionListener(e -> delegate.newTheme());
-		
+
 		gbc.gridwidth = 1;
 		gbc.gridy = 1;
 		gbc.fill = GridBagConstraints.NONE;
@@ -54,5 +58,9 @@ public class ThemeButtonsPanel extends JPanel {
 
 		gbc.gridx = 2;
 		add(btnNeuesThema, gbc);
+	}
+	
+	void showMessage(String msg) {
+		messageArea.setText(msg);
 	}
 }
