@@ -76,10 +76,8 @@ public class ThemeListPanel extends JPanel {
 	boolean adjusting = false;
 
 	private void listItemWasSelected(ListSelectionEvent e) {
-		System.out.println("model: " + jList.getModel().getElementAt(2));
 		if (adjusting) {
 			delegate.receiveSelection(jList.getSelectedValue());
-			System.out.println(jList.getSelectedIndex());
 		}
 		adjusting = e.getValueIsAdjusting();
 	}
