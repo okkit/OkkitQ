@@ -11,18 +11,53 @@ import persistence.serialization.QuizDataManager;
 import quizlogic.Theme;
 
 /**
+ * Das Hauptpanel für die Themenverwaltung in der Nutzeroberfläche.
+ * <p>
+ * Dieses Panel kombiniert eine Themenliste, ein Bearbeitungspanel sowie
+ * Steuerungsbuttons. Es übernimmt zudem die Steuerung der Haupt-CRUD-Aktionen
+ * (Create, Read, Update, Delete) für {@link Theme}-Objekte über Delegation.
+ * </p>
  * 
+ * The main panel for theme management in the application's graphical user
+ * interface.
+ * <p>
+ * This panel combines a theme list, an editing panel, and control buttons. It
+ * manages the main CRUD (Create, Read, Update, Delete) operations for
+ * {@link Theme} objects via delegation.
+ * </p>
+ *
+ * <ul>
+ * <li>Left panel: {@link ThemeEditPanel} for editing a theme</li>
+ * <li>Right panel: {@link ThemeListPanel} displaying all themes</li>
+ * <li>Bottom panel: {@link ThemeButtonsPanel} containing action buttons
+ * (create, save, delete)</li>
+ * </ul>
+ *
+ * 
+ * @author ValentinaTikko
  */
+
 public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, ThemeSelectionDelegate {
 
+	/** Panel with the theme list. */
 	ThemeListPanel panelThemenList;
+
+	/** Panel for editing a theme. */
 	ThemeEditPanel panelThemeEdit;
+
+	/** Panel with control buttons. */
 	ThemeButtonsPanel panelActions;
 
+	/**
+	 * Data manager for quiz themes. Manages the data transport from the persistence
+	 * layer and backwards
+	 */
 	QuizDataInterface manager = new QuizDataManager();
 
 	/**
-	 * Konstruktor.
+	 * Erzeugt ein neues {@code ThemeMainPanel} und initialisiert sämtliche
+	 * Unterpanels. Constructs a new {@code ThemeMainPanel} and initializes all
+	 * sub-panels.
 	 */
 	public ThemeMainPanel() {
 		super();
@@ -31,7 +66,7 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	}
 
 	/**
-	 * Initialisiert die Felder (also die Panels)
+	 * Initializes the sub-panels and assigns necessary delegates.
 	 */
 	void initPanels() {
 		panelThemenList = new ThemeListPanel(manager.getAllThemes());
@@ -45,7 +80,7 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	}
 
 	/**
-	 * FÃ¼hgt die Panels hinzu (addet) inkl. Layout
+	 * Adds the panels to the main panel and arranges them using GridBagLayout.
 	 */
 	void addPanels() {
 		setLayout(new GridBagLayout());
@@ -75,6 +110,17 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 		add(panelActions, gbc);
 	}
 
+	/**
+	 * Updates the sub-panels with changed data; displays a status message and sets
+	 * the theme to edit when needed.<br>
+	 * Aktualisiert die Unterpanels anhand geänderter Daten, zeigt eine
+	 * Statusmeldung und setzt ggf. das zu bearbeitende Thema.
+	 *
+	 * @param msg             Message to display (e.g., success/error)
+	 * @param th              The theme to display in the edit panel (may be null)
+	 * @param refreshListData {@code true} if the theme list should be reloaded,
+	 *                        otherwise {@code false}
+	 */
 	void refreschPanelsWith(String msg, Theme th, boolean refreshListData) {
 		panelActions.showMessage(msg);
 		panelThemeEdit.setThemeToEdit(th);
@@ -82,6 +128,13 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 			panelThemenList.refreshListData(manager.getAllThemes());
 	}
 
+	/**
+	 * Called when a theme is to be saved. Retrieves the currently edited theme,
+	 * saves it using the manager, and updates the UI.<br>
+	 * Wird aufgerufen, wenn ein Thema gespeichert werden soll. Holt das aktuell
+	 * editierte Thema, speichert es im Manager und aktualisiert die Oberfläche.
+	 * 
+	 */
 	@Override
 	public void saveTheme() {
 		Theme theme = panelThemeEdit.getEditedTheme();
@@ -92,18 +145,34 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 
 	}
 
+	/**
+	 * Called when a theme is to be deleted. Deletes the currently edited theme and
+	 * updates the UI.<br>
+	 * Wird aufgerufen, wenn ein Thema gelöscht werden soll. Löscht das aktuell
+	 * editierte Thema im Manager und aktualisiert die Oberfläche.
+	 */
 	@Override
 	public void deleteTheme() {
 		String msg = manager.deleteTheme(panelThemeEdit.getEditedTheme());
 		refreschPanelsWith(msg, null, true);
 	}
 
+	/**
+	 * Wird aufgerufen, wenn ein neues Thema angelegt werden soll. Setzt die
+	 * Oberfläche auf einen leeren Zustand.
+	 */
 	@Override
 	public void newTheme() {
 		refreschPanelsWith(null, null, true);
 
 	}
 
+	/**
+	 * Wird aufgerufen, wenn ein Thema aus der Liste ausgewählt wurde. Übergibt das
+	 * ausgewählte Thema an das Bearbeitungspanel.
+	 *
+	 * @param theme Das vom Nutzer ausgewählte {@link Theme}
+	 */
 	@Override
 	public void receiveSelection(Theme theme) {
 		panelActions.showMessage(null);
