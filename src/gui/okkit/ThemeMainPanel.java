@@ -81,13 +81,13 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 		if (refreshListData)
 			panelThemenList.refreshListData(manager.getAllThemes());
 	}
-	
+
 	@Override
 	public void saveTheme() {
 		Theme theme = panelThemeEdit.getEditedTheme();
-		System.out.println("saveTheme " + theme.getId() + " " +  theme.getText());
+		System.out.println("saveTheme " + theme.getId() + " " + theme.getText());
 		String msg = manager.saveTheme(theme);
-		System.out.println("saved " + theme.getId() + " " +  theme.getText());
+		System.out.println("saved " + theme.getId() + " " + theme.getText());
 		refreschPanelsWith(msg, theme, true);
 
 	}
@@ -97,7 +97,6 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 		String msg = manager.deleteTheme(panelThemeEdit.getEditedTheme());
 		refreschPanelsWith(msg, null, true);
 	}
-
 
 	@Override
 	public void newTheme() {
