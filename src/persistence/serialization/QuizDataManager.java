@@ -122,4 +122,10 @@ public class QuizDataManager implements QuizDataInterface {
 		return getThemesCount() + 1;
 	}
 
+	@Override
+	public Question getRandomQuestionFor(Theme th) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

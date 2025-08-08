@@ -1,7 +1,11 @@
-package quizlogic;
+package quizlogic.fake;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import quizlogic.Answer;
+import quizlogic.Question;
+import quizlogic.Theme;
 
 public class FakeDataDeliverer {
 

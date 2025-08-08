@@ -1,4 +1,4 @@
-package quizlogic;
+package quizlogic.fake;
 
 public class FakeDataTest {
 

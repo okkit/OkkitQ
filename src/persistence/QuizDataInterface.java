@@ -9,6 +9,7 @@ import quizlogic.Theme;
 public interface QuizDataInterface {
 
 	public Question getRandomQuestion();
+	public Question getRandomQuestionFor(Theme th);
 
 	public ArrayList<Theme> getAllThemes();
 

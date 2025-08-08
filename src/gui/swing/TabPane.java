@@ -1,7 +1,7 @@
 /**
  * @author ValentinaTikko
  */
-package gui.okkit;
+package gui.swing;
 
 import java.awt.Color;
 import java.awt.Font;

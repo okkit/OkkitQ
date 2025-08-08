@@ -1,4 +1,4 @@
-package gui.okkit;
+package gui.swing;
 
 public interface ThemeActionDelegate {
 	
