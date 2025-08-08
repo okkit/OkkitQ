@@ -1,9 +1,9 @@
 package gui.swing;
 
-import quizlogic.Theme;
+import quizlogic.dto.ThemeDTO;
 
 public interface ThemeSelectionDelegate {
 	
-	void receiveSelection(Theme th);
+	void receiveSelection(ThemeDTO th);
 
 }

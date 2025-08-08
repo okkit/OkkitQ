@@ -6,16 +6,16 @@ import java.awt.Insets;
 
 import javax.swing.JPanel;
 
-import persistence.QuizDataInterface;
-import persistence.serialization.QuizDataManager;
-import quizlogic.Theme;
+import gui.Initialisation;
+import quizlogic.AppManager;
+import quizlogic.dto.ThemeDTO;
 
 /**
  * Das Hauptpanel für die Themenverwaltung in der Nutzeroberfläche.
  * <p>
  * Dieses Panel kombiniert eine Themenliste, ein Bearbeitungspanel sowie
  * Steuerungsbuttons. Es übernimmt zudem die Steuerung der Haupt-CRUD-Aktionen
- * (Create, Read, Update, Delete) für {@link Theme}-Objekte über Delegation.
+ * (Create, Read, Update, Delete) für {@link ThemeDTO}-Objekte über Delegation.
  * </p>
  * 
  * The main panel for theme management in the application's graphical user
@@ -23,7 +23,7 @@ import quizlogic.Theme;
  * <p>
  * This panel combines a theme list, an editing panel, and control buttons. It
  * manages the main CRUD (Create, Read, Update, Delete) operations for
- * {@link Theme} objects via delegation.
+ * {@link ThemeDTO} objects via delegation.
  * </p>
  *
  * <ul>
@@ -52,7 +52,8 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	 * Data manager for quiz themes. Manages the data transport from the persistence
 	 * layer and backwards
 	 */
-	QuizDataInterface manager = new QuizDataManager();
+//	QuizDataInterface manager = new QuizDataManager();
+	AppManager manager = Initialisation.getClassForAppManager()	;
 
 	/**
 	 * Erzeugt ein neues {@code ThemeMainPanel} und initialisiert sämtliche
@@ -69,8 +70,8 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	 * Initializes the sub-panels and assigns necessary delegates.
 	 */
 	void initPanels() {
-		panelThemenList = new ThemeListPanel(manager.getAllThemes());
-		System.out.println(manager.getAllThemes());
+		panelThemenList = new ThemeListPanel(manager.getThemes());
+		System.out.println(manager.getThemes());
 		panelThemenList.setDelegate(this);
 
 		panelThemeEdit = new ThemeEditPanel();
@@ -121,11 +122,11 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	 * @param refreshListData {@code true} if the theme list should be reloaded,
 	 *                        otherwise {@code false}
 	 */
-	void refreschPanelsWith(String msg, Theme th, boolean refreshListData) {
+	void refreschPanelsWith(String msg, ThemeDTO th, boolean refreshListData) {
 		panelActions.showMessage(msg);
 		panelThemeEdit.setThemeToEdit(th);
 		if (refreshListData)
-			panelThemenList.refreshListData(manager.getAllThemes());
+			panelThemenList.refreshListData(manager.getThemes());
 	}
 
 	/**
@@ -137,7 +138,7 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	 */
 	@Override
 	public void saveTheme() {
-		Theme theme = panelThemeEdit.getEditedTheme();
+		ThemeDTO theme = panelThemeEdit.getEditedTheme();
 		System.out.println("saveTheme " + theme.getId() + " " + theme.getText());
 		String msg = manager.saveTheme(theme);
 		System.out.println("saved " + theme.getId() + " " + theme.getText());
@@ -171,10 +172,10 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	 * Wird aufgerufen, wenn ein Thema aus der Liste ausgewählt wurde. Übergibt das
 	 * ausgewählte Thema an das Bearbeitungspanel.
 	 *
-	 * @param theme Das vom Nutzer ausgewählte {@link Theme}
+	 * @param theme Das vom Nutzer ausgewählte {@link ThemeDTO}
 	 */
 	@Override
-	public void receiveSelection(Theme theme) {
+	public void receiveSelection(ThemeDTO theme) {
 		panelActions.showMessage(null);
 		panelThemeEdit.setThemeToEdit(theme);
 

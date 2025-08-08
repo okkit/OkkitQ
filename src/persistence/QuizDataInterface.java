@@ -2,27 +2,27 @@ package persistence;
 
 import java.util.ArrayList;
 
-import quizlogic.Answer;
-import quizlogic.Question;
-import quizlogic.Theme;
+import quizlogic.dto.AnswerDTO;
+import quizlogic.dto.QuestionDTO;
+import quizlogic.dto.ThemeDTO;
 
 public interface QuizDataInterface {
 
-	public Question getRandomQuestion();
-	public Question getRandomQuestionFor(Theme th);
+	public QuestionDTO getRandomQuestion();
+	public QuestionDTO getRandomQuestionFor(ThemeDTO th);
 
-	public ArrayList<Theme> getAllThemes();
+	public ArrayList<ThemeDTO> getAllThemes();
 
-	public ArrayList<Question> getQuestionsFor(Theme th);
+	public ArrayList<QuestionDTO> getQuestionsFor(ThemeDTO th);
 
-	public ArrayList<Answer> getAnsersFor(Question q);
+	public ArrayList<AnswerDTO> getAnsersFor(QuestionDTO q);
 	
 	
-	public String saveTheme(Theme th);
-	public String deleteTheme(Theme th);
+	public String saveTheme(ThemeDTO th);
+	public String deleteTheme(ThemeDTO th);
 	
-	public String saveQuestion(Question q);
-	public String deleteQuestion(Question q);
+	public String saveQuestion(QuestionDTO q);
+	public String deleteQuestion(QuestionDTO q);
 
 }
 

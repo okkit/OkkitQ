@@ -11,7 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import quizlogic.Theme;
+import quizlogic.dto.ThemeDTO;
 
 public class ThemeEditPanel extends JPanel {
 
@@ -20,7 +20,7 @@ public class ThemeEditPanel extends JPanel {
 	JLabel infoLabel;
 	JTextArea infoArea;
 
-	Theme theme;
+	ThemeDTO theme;
 
 	public ThemeEditPanel() {
 
@@ -29,17 +29,17 @@ public class ThemeEditPanel extends JPanel {
 		addComponents();
 	}
 
-	Theme getEditedTheme() {
+	ThemeDTO getEditedTheme() {
 
 		if (theme == null) {
-			theme = new Theme();
+			theme = new ThemeDTO();
 		}
 		theme.setTitle(titelFeld.getText());
 		theme.setText(infoArea.getText());
 		return theme;
 	}
 
-	void setThemeToEdit(Theme theme) {
+	void setThemeToEdit(ThemeDTO theme) {
 		this.theme = theme;
 		String borderTitle = theme == null ? "Neues Thema" : "Thema " + theme.getId();
 		setBorder(BorderFactory.createTitledBorder(borderTitle));

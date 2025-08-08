@@ -1,39 +1,46 @@
-package quizlogic;
+package quizlogic.dto;
 
 import java.util.ArrayList;
 
-public class Question extends QObject {
+import quizlogic.DataTransportObject;
+
+public class QuestionDTO extends DataTransportObject {
 
 	private String title;
 	private String text;
 
-	private Theme thema;
-	private ArrayList<Answer> answers;
+	private ThemeDTO thema;
+	private ArrayList<AnswerDTO> answers;
 
-	public Question(Theme thema) {
+	public QuestionDTO(ThemeDTO thema) {
 		super();
 		this.thema = thema;
 	}
 	
 	
-	public ArrayList<Answer> getAnswers() {
+	public QuestionDTO() {
+		super();
+	}
+
+
+	public ArrayList<AnswerDTO> getAnswers() {
 		return answers;
 	}
 
 
-	public void addAnswer(Answer a) {
+	public void addAnswer(AnswerDTO a) {
 		
 		if (answers == null) {
-			answers = new ArrayList<Answer>();
+			answers = new ArrayList<AnswerDTO>();
 		}
 		answers.add(a);
 	}
 
-	public Theme getThema() {
+	public ThemeDTO getThema() {
 		return thema;
 	}
 
-	public void setThema(Theme thema) {
+	public void setThema(ThemeDTO thema) {
 		this.thema = thema;
 	}
 

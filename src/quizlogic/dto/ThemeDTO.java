@@ -1,18 +1,20 @@
-package quizlogic;
+package quizlogic.dto;
 
 import java.util.ArrayList;
 
-public class Theme extends QObject {
+import quizlogic.DataTransportObject;
+
+public class ThemeDTO extends DataTransportObject {
 
 	private String title;
 	private String text;
 
-	private ArrayList<Question> questions;
+	private ArrayList<QuestionDTO> questions;
 
-	public void addQuestion(Question q) {
+	public void addQuestion(QuestionDTO q) {
 
 		if (questions == null) {
-			questions = new ArrayList<Question>();
+			questions = new ArrayList<QuestionDTO>();
 		}
 
 		questions.add(q);
@@ -31,13 +33,13 @@ public class Theme extends QObject {
 		info.append("\n  Text: " + text);
 		info.append("\n\n  Fragen:");
 		if (questions != null) {
-			for (Question question : questions) {
+			for (QuestionDTO question : questions) {
 
 				info.append("\n\n    Title: " + question.getTitle());
 				info.append("\n    Text: " + question.getText());
 
 				info.append("\n\n    Antworten:");
-				for (Answer a : question.getAnswers()) {
+				for (AnswerDTO a : question.getAnswers()) {
 
 					info.append("\n      Text: " + a.getText());
 					info.append("-> " + (a.isCorrect() ? "richtig" : "falsch"));
@@ -47,11 +49,11 @@ public class Theme extends QObject {
 		return info.toString();
 	}
 
-	public ArrayList<Question> getQuestions() {
+	public ArrayList<QuestionDTO> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(ArrayList<Question> questions) {
+	public void setQuestions(ArrayList<QuestionDTO> questions) {
 		this.questions = questions;
 	}
 

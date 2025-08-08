@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import persistence.QuizDataInterface;
 import persistence.serialization.QuizDataManager;
-import quizlogic.Question;
-import quizlogic.Theme;
+import quizlogic.dto.QuestionDTO;
+import quizlogic.dto.ThemeDTO;
 
 public class Test {
 
@@ -13,7 +13,7 @@ public class Test {
 
 
 		QuizDataInterface manager = new QuizDataManager();
-		Question q = manager.getRandomQuestion();
+		QuestionDTO q = manager.getRandomQuestion();
 		q.getThema().setId(-1);
 		q.getThema().setTitle("THEMA AUS DEM tEST");
 		manager.saveQuestion(q);
@@ -30,9 +30,9 @@ public class Test {
 
 	private static void showAllThemes() {
 		QuizDataInterface manager = new QuizDataManager();
-		ArrayList<Theme> list2 = manager.getAllThemes();
+		ArrayList<ThemeDTO> list2 = manager.getAllThemes();
 
-		for (Theme thema : list2) {
+		for (ThemeDTO thema : list2) {
 			System.out.println(thema);
 		}
 

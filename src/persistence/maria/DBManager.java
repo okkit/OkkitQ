@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import persistence.QuizDataInterface;
-import quizlogic.Answer;
-import quizlogic.Question;
-import quizlogic.Theme;
+import quizlogic.dto.AnswerDTO;
+import quizlogic.dto.QuestionDTO;
+import quizlogic.dto.ThemeDTO;
 
 /**
  * The class manages all interactions with the MySQL data base.<br>
@@ -49,55 +49,55 @@ public class DBManager implements QuizDataInterface{
 	}
 
 	@Override
-	public Question getRandomQuestion() {
+	public QuestionDTO getRandomQuestion() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	@Override
-	public Question getRandomQuestionFor(Theme th) {
+	public QuestionDTO getRandomQuestionFor(ThemeDTO th) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Theme> getAllThemes() {
+	public ArrayList<ThemeDTO> getAllThemes() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Question> getQuestionsFor(Theme th) {
+	public ArrayList<QuestionDTO> getQuestionsFor(ThemeDTO th) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Answer> getAnsersFor(Question q) {
+	public ArrayList<AnswerDTO> getAnsersFor(QuestionDTO q) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String saveTheme(Theme th) {
+	public String saveTheme(ThemeDTO th) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String deleteTheme(Theme th) {
+	public String deleteTheme(ThemeDTO th) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String saveQuestion(Question q) {
+	public String saveQuestion(QuestionDTO q) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String deleteQuestion(Question q) {
+	public String deleteQuestion(QuestionDTO q) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -14,11 +14,11 @@ import javax.swing.JScrollPane;
 import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
 
-import quizlogic.Theme;
+import quizlogic.dto.ThemeDTO;
 
 public class ThemeListPanel extends JPanel {
 
-	JList<Theme> jList;
+	JList<ThemeDTO> jList;
 
 	ThemeSelectionDelegate delegate;
 
@@ -26,14 +26,14 @@ public class ThemeListPanel extends JPanel {
 		this.delegate = delegate;
 	}
 
-	public ThemeListPanel(ArrayList<Theme> listData) {
+	public ThemeListPanel(ArrayList<ThemeDTO> listData) {
 		super();
 
 		initComponents();
 		fillWithData(listData);
 	}
 
-	private void fillWithData(ArrayList<Theme> listData) {
+	private void fillWithData(ArrayList<ThemeDTO> listData) {
 		jList.setModel(createModel(listData));
 		jList.addListSelectionListener(e -> listItemWasSelected(e));
 		
@@ -50,7 +50,7 @@ public class ThemeListPanel extends JPanel {
 		gbc.weightx = 1.0;
 		gbc.weighty = 1.0;
 
-		jList = new JList<Theme>();
+		jList = new JList<ThemeDTO>();
 		jList.setFont(new Font("Serif", Font.PLAIN, 15));
 		JScrollPane scrollPane = new JScrollPane(jList);
 
@@ -59,13 +59,13 @@ public class ThemeListPanel extends JPanel {
 	}
 
 
-	public void refreshListData(ArrayList<Theme> listData) {
+	public void refreshListData(ArrayList<ThemeDTO> listData) {
 		jList.setModel(createModel(listData));
 	}
 
-	private ListModel<Theme> createModel(ArrayList<Theme> listData) {
-		DefaultListModel<Theme> model = new DefaultListModel<Theme>();
-		for (Theme th : listData) {
+	private ListModel<ThemeDTO> createModel(ArrayList<ThemeDTO> listData) {
+		DefaultListModel<ThemeDTO> model = new DefaultListModel<ThemeDTO>();
+		for (ThemeDTO th : listData) {
 			model.addElement(th);
 		}
 		return model;

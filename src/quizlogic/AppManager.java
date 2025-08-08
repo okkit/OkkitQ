@@ -5,22 +5,30 @@ package quizlogic;
 
 import java.util.ArrayList;
 
+import quizlogic.dto.AnswerDTO;
+import quizlogic.dto.QuestionDTO;
+import quizlogic.dto.ThemeDTO;
+
 /**
- * This interface describes the features of a class, which manages:
- * 1. the business logic e.c. validation of the input data<br>
+ * This interface describes the features of a class, which manages: 1. the
+ * business logic e.c. validation of the input data<br>
  * 2. data transfer between the GUI and persistence layers.
  * 
  */
 public interface AppManager {
 
-	public ArrayList<Theme> getThemes();
+	public ArrayList<ThemeDTO> getThemes();
 
-	public Question getRandomQuestion();
+	public QuestionDTO getRandomQuestion();
+	
+	public QuestionDTO getRandomQuestionFor(ThemeDTO theme);
 
-	public void createThemes(int count);
+	public String saveTheme(ThemeDTO theme);
 
-	public void createQuestionsFor(Theme th);
+	public String deleteTheme(ThemeDTO theme);
 
-	public void createAnsersFor(Question q);
+	public String saveAnswer(AnswerDTO answer);
+
+	public String deleteAnswer(AnswerDTO answer);
 
 }

@@ -9,9 +9,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import persistence.QuizDataInterface;
-import quizlogic.Answer;
-import quizlogic.Question;
-import quizlogic.Theme;
+import quizlogic.dto.AnswerDTO;
+import quizlogic.dto.QuestionDTO;
+import quizlogic.dto.ThemeDTO;
 
 public class QuizDataManager implements QuizDataInterface {
 
@@ -19,16 +19,16 @@ public class QuizDataManager implements QuizDataInterface {
 	private static final String FILE = FOLDER + "\\Theme.";
 
 	@Override
-	public Question getRandomQuestion() {
+	public QuestionDTO getRandomQuestion() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Theme> getAllThemes() {
+	public ArrayList<ThemeDTO> getAllThemes() {
 		FileInputStream fileInputStream;
-		Theme theme;
-		ArrayList<Theme> list = new ArrayList<>();
+		ThemeDTO theme;
+		ArrayList<ThemeDTO> list = new ArrayList<>();
 		try {
 			File folder = new File(FOLDER);
 			if (folder.list() == null)
@@ -39,7 +39,7 @@ public class QuizDataManager implements QuizDataInterface {
 
 					fileInputStream = new FileInputStream(fileEntry);
 					ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-					theme = (Theme) objectInputStream.readObject();
+					theme = (ThemeDTO) objectInputStream.readObject();
 					list.add(theme);
 					objectInputStream.close();
 				}
@@ -51,19 +51,19 @@ public class QuizDataManager implements QuizDataInterface {
 	}
 
 	@Override
-	public ArrayList<Question> getQuestionsFor(Theme th) {
+	public ArrayList<QuestionDTO> getQuestionsFor(ThemeDTO th) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Answer> getAnsersFor(Question q) {
+	public ArrayList<AnswerDTO> getAnsersFor(QuestionDTO q) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String saveTheme(Theme th) {
+	public String saveTheme(ThemeDTO th) {
 		FileOutputStream fileOutputStream;
 		try {
 			if (th.getId() == -1)
@@ -82,20 +82,20 @@ public class QuizDataManager implements QuizDataInterface {
 	}
 
 	@Override
-	public String deleteTheme(Theme th) {
+	public String deleteTheme(ThemeDTO th) {
 		File file = new File(FILE + th.getId());
 		file.delete();
 		return "Tas Thema wurde gelöscht";
 	}
 
 	@Override
-	public String saveQuestion(Question q) {
+	public String saveQuestion(QuestionDTO q) {
 
 		return saveTheme(q.getThema());
 	}
 
 	@Override
-	public String deleteQuestion(Question q) {
+	public String deleteQuestion(QuestionDTO q) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -123,7 +123,7 @@ public class QuizDataManager implements QuizDataInterface {
 	}
 
 	@Override
-	public Question getRandomQuestionFor(Theme th) {
+	public QuestionDTO getRandomQuestionFor(ThemeDTO th) {
 		// TODO Auto-generated method stub
 		return null;
 	}

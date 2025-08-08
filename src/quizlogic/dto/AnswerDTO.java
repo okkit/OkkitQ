@@ -1,16 +1,21 @@
-package quizlogic;
+package quizlogic.dto;
 
-public class Answer extends QObject {
+import quizlogic.DataTransportObject;
 
-	public static final int MAX_ANWERS = 4;
+public class AnswerDTO extends DataTransportObject {
+
 	private String text;
 	private boolean correct;
 
-	private Question question;
+	private QuestionDTO question;
 
-	public Answer(Question question) {
+	public AnswerDTO(QuestionDTO question) {
 		super();
 		this.question = question;
+	}
+
+	public AnswerDTO() {
+		super();
 	}
 
 	public String getText() {
@@ -29,11 +34,11 @@ public class Answer extends QObject {
 		this.correct = correct;
 	}
 
-	public Question getQuestion() {
+	public QuestionDTO getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(Question question) {
+	public void setQuestion(QuestionDTO question) {
 		this.question = question;
 	}
 
