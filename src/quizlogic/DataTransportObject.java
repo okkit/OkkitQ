@@ -3,8 +3,7 @@ package quizlogic;
 import java.io.Serializable;
 
 /**
- * Die MutterKlasse aller Objekte in der busineslogic-Schicht werden
- * serialisierbar,<br d.h. implementes Serializable und serialVersionUID
+ * The class genralizes all objects of the logic layer.
  */
 public class DataTransportObject implements Serializable {
 

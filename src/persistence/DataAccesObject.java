@@ -2,21 +2,23 @@ package persistence;
 
 import quizlogic.DataTransportObject;
 
+/**
+ * The class generalizes all persistently saveable classes.
+ */
 public abstract class DataAccesObject {
 
-	private int id = -1;
-
+	protected int id = -1;
+	
 	/**
-	 * do not use because of forgetting to copy id. Use DataAccesObject(int id)
-	 * only!
-	 * 
-	 * @throws Exception
+	 * Converts a DataAccesObject to a DataAccesObject.<br>
+	 * Evry class that extens this class have to implement this method. 
+	 * @return
 	 */
-	public DataAccesObject() throws Exception {
-		throw new Exception(
-				"do not use this constructor because of forgetting to copy id. Use DataAccesObject(int id) only!");
-	}
+	public abstract DataTransportObject toDTO();
 
+	public DataAccesObject() {
+		super();
+	}
 
 	public DataAccesObject(int id) {
 		super();
@@ -31,7 +33,5 @@ public abstract class DataAccesObject {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public abstract DataTransportObject toDTO();
 
 }
