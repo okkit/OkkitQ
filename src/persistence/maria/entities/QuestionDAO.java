@@ -1,3 +1,6 @@
+/**
+ * @author ValentinaTikko
+ */
 package persistence.maria.entities;
 
 import java.sql.PreparedStatement;
@@ -10,15 +13,16 @@ import quizlogic.dto.ThemeDTO;
 /**
  * This class represents the entity Theme
  */
-public class ThemeDAO extends MariaAccesObject {
+public class QuestionDAO extends MariaAccesObject {
 
-	private final String SQL_INSERT = "INSERT INTO okkitq.theme (TITLE, TEXT) VALUES (?, ?);";
-	private final String SQL_UPDATE = "UPDATE okkitq.theme SET TITLE = ?, TEXT = ? WHERE (ID = ?);";
+	private final String SQL_INSERT = "INSERT INTO okkitq.question (TITLE, TEXT, THEME_ID) VALUES (?, ?, ?);";
+	private final String SQL_UPDATE = "UPDATE okkitq.question SET TITLE = ?, TEXT = ?, THEME_ID = ? WHERE (ID = ?);";
 
-	private final String SQL_SELECT = "SELECT * from okkitq.theme;";
+	private final String SQL_SELECT = "SELECT * from okkitq.question;";
 
 	private String title;
 	private String text;
+	private int theme_id;
 
 	/**
 	 * Constructs a ThemeDAO-instance using the corresponding instance of the
@@ -26,7 +30,7 @@ public class ThemeDAO extends MariaAccesObject {
 	 * 
 	 * @param dto
 	 */
-	public ThemeDAO(ThemeDTO dto) {
+	public QuestionDAO(ThemeDTO dto) {
 		super(dto.getId());
 		title = dto.getTitle();
 		text = dto.getText();
@@ -37,7 +41,7 @@ public class ThemeDAO extends MariaAccesObject {
 	 * 
 	 * @param row
 	 */
-	public ThemeDAO(Object[] row) {
+	public QuestionDAO(Object[] row) {
 
 		super();
 		id = (int) row[0];
@@ -94,6 +98,14 @@ public class ThemeDAO extends MariaAccesObject {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public int getTheme_id() {
+		return theme_id;
+	}
+
+	public void setTheme_id(int theme_id) {
+		this.theme_id = theme_id;
 	}
 
 }
