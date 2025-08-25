@@ -1,9 +1,8 @@
-package quizlogic.fake;
+package quizlogic;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import quizlogic.AppManager;
 import quizlogic.dto.AnswerDTO;
 import quizlogic.dto.QuestionDTO;
 import quizlogic.dto.ThemeDTO;

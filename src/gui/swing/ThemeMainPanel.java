@@ -6,8 +6,10 @@ import java.awt.Insets;
 
 import javax.swing.JPanel;
 
-import gui.Initialisation;
 import quizlogic.AppManager;
+import quizlogic.FakeManager;
+import quizlogic.Initialisation;
+import quizlogic.OkkitQConstants;
 import quizlogic.dto.ThemeDTO;
 
 /**
@@ -52,8 +54,7 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	 * Data manager for quiz themes. Manages the data transport from the persistence
 	 * layer and backwards
 	 */
-//	QuizDataInterface manager = new QuizDataManager();
-	AppManager manager = Initialisation.getClassForAppManager()	;
+	AppManager manager;
 
 	/**
 	 * Erzeugt ein neues {@code ThemeMainPanel} und initialisiert sämtliche
@@ -62,8 +63,13 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	 */
 	public ThemeMainPanel() {
 		super();
+		manager = Initialisation.getClassForAppManager(OkkitQConstants.INI_FILE_FOR_APP_MANAGER);
+		if (manager == null) {
+			manager = new FakeManager();
+		}
 		initPanels();
 		addPanels();
+		
 	}
 
 	/**
@@ -71,7 +77,6 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	 */
 	void initPanels() {
 		panelThemenList = new ThemeListPanel(manager.getThemes());
-		System.out.println(manager.getThemes());
 		panelThemenList.setDelegate(this);
 
 		panelThemeEdit = new ThemeEditPanel();
@@ -139,9 +144,7 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	@Override
 	public void saveTheme() {
 		ThemeDTO theme = panelThemeEdit.getEditedTheme();
-		System.out.println("saveTheme " + theme.getId() + " " + theme.getText());
 		String msg = manager.saveTheme(theme);
-		System.out.println("saved " + theme.getId() + " " + theme.getText());
 		refreschPanelsWith(msg, theme, true);
 
 	}

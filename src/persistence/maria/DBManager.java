@@ -167,6 +167,33 @@ public class DBManager implements QuizDataInterface {
 		}
 		return all;
 	}
+	
+	private String deleteDAO(String daoName, int daoID) {
+		
+		if (daoID < 0)
+			return daoName + "kann nicht gelöscht werden, da nicht existiert";
+		
+		String command = "delete from " + daoName + " where id = ?";
+		
+		
+		Connection con = getConnection();
+		try (PreparedStatement stmt = con.prepareStatement(command)){
+			
+			con.setAutoCommit(false);	
+			stmt.setInt(1, daoID);
+			stmt.execute();
+			con.commit();
+			stmt.close();
+		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				return e1.getMessage();
+			}
+			return e.getMessage();
+		}
+		return "Das " + daoName + " wurde gelöscht";
+	}
 
 	@Override
 	public QuestionDTO getRandomQuestion() {
@@ -210,13 +237,13 @@ public class DBManager implements QuizDataInterface {
 	public String saveTheme(ThemeDTO th) {
 
 		ThemeDAO dao = new ThemeDAO(th);
-		return DBManager.getInstance().saveDao(dao);
+		return saveDao(dao);
 	}
 
 	@Override
 	public String deleteTheme(ThemeDTO th) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return deleteDAO("Theme", th.getId());
 	}
 
 	@Override
