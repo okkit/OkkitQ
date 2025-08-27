@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import persistence.serialization.SerializableDAO;
 import quizlogic.DataTransportObject;
+import quizlogic.dto.AnswerDTO;
 import quizlogic.dto.QuestionDTO;
 import quizlogic.dto.ThemeDTO;
 
@@ -19,10 +20,20 @@ public class ThemeDAO extends SerializableDAO {
 		title = dto.getTitle();
 		text = dto.getText();
 
-		questions = new ArrayList<QuestionDAO>(dto.getQuestions().size());
-		for (QuestionDTO qDto : dto.getQuestions()) {
-			questions.add(new QuestionDAO(qDto));
-		}
+//		if (dto.getQuestions() != null) {
+//			questions = new ArrayList<QuestionDAO>(dto.getQuestions().size());
+//			for (QuestionDTO qDto : dto.getQuestions()) {
+//				QuestionDAO qDao = new QuestionDAO(qDto);
+//				questions.add(qDao);
+//				
+//				if (qDto.getAnswers() != null) {
+//					ArrayList<AnswerDAO> answers = new ArrayList<AnswerDAO>(qDto.getAnswers().size());
+//					for (AnswerDTO aDto : qDto.getAnswers()) {
+//						answers.add(new AnswerDAO(aDto));
+//					}
+//				}
+//			}
+//		}
 	}
 
 	@Override
@@ -30,7 +41,25 @@ public class ThemeDAO extends SerializableDAO {
 
 		ThemeDTO dto = new ThemeDTO();
 		dto.setId(getId());
-		return null;
+		dto.setTitle(title);
+		dto.setText(text);
+
+		if (questions != null) {
+			ArrayList<QuestionDTO> qDtoS = new ArrayList<QuestionDTO>(questions.size());
+			for (QuestionDAO questionDAO : questions) {
+				qDtoS.add((QuestionDTO) questionDAO.toDTO());
+
+				if (questionDAO.getAnswers() != null) {
+					ArrayList<AnswerDTO> aDtoS = new ArrayList<AnswerDTO>(
+							questionDAO.getAnswers().size());
+
+					for (AnswerDAO answerDAO : questionDAO.getAnswers()) {
+						aDtoS.add((AnswerDTO) answerDAO.toDTO());
+					}
+				}
+			}
+		}
+		return dto;
 	}
 
 	public String getTitle() {

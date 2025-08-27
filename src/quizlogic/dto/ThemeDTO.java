@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import quizlogic.DataTransportObject;
 
-public class ThemeDTO extends DataTransportObject {
+public class ThemeDTO extends DataTransportObject implements Comparable<ThemeDTO>{
 
 	private String title;
 	private String text;
@@ -21,10 +21,10 @@ public class ThemeDTO extends DataTransportObject {
 	}
 
 	public String toString() {
-		
+
 		return getId() + " " + title;
 	}
-	
+
 	public String getFullInfo() {
 		StringBuilder info = new StringBuilder();
 
@@ -71,6 +71,12 @@ public class ThemeDTO extends DataTransportObject {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	@Override
+	public int compareTo(ThemeDTO o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import persistence.QuizDataInterface;
+import persistence.serialization.dao.ThemeDAO;
 import quizlogic.dto.AnswerDTO;
 import quizlogic.dto.QuestionDTO;
 import quizlogic.dto.ThemeDTO;
@@ -27,7 +28,7 @@ public class QuizDataManager implements QuizDataInterface {
 	@Override
 	public ArrayList<ThemeDTO> getAllThemes() {
 		FileInputStream fileInputStream;
-		ThemeDTO theme;
+		ThemeDAO theme;
 		ArrayList<ThemeDTO> list = new ArrayList<>();
 		try {
 			File folder = new File(FOLDER);
@@ -39,8 +40,8 @@ public class QuizDataManager implements QuizDataInterface {
 
 					fileInputStream = new FileInputStream(fileEntry);
 					ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-					theme = (ThemeDTO) objectInputStream.readObject();
-					list.add(theme);
+					theme = (ThemeDAO) objectInputStream.readObject();
+					list.add((ThemeDTO) theme.toDTO());
 					objectInputStream.close();
 				}
 			}
@@ -64,15 +65,21 @@ public class QuizDataManager implements QuizDataInterface {
 
 	@Override
 	public String saveTheme(ThemeDTO th) {
+		
+		ThemeDAO dao = new ThemeDAO(th);
 		FileOutputStream fileOutputStream;
 		try {
-			if (th.getId() == -1)
-				th.setId(createNewThemeId());
+			int id = th.getId();
+			if (id == -1) {
+				id = createNewThemeId();
+				th.setId(id);
+			}
+				dao.setId(id);
 
-			fileOutputStream = new FileOutputStream(FILE + th.getId());
+			fileOutputStream = new FileOutputStream(FILE + id);
 
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-			objectOutputStream.writeObject(th);
+			objectOutputStream.writeObject(dao);
 			objectOutputStream.flush();
 			objectOutputStream.close();
 		} catch (IOException e) {

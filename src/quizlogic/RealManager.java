@@ -1,6 +1,7 @@
 package quizlogic;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import persistence.QuizDataInterface;
 import persistence.serialization.QuizDataManager;
@@ -22,7 +23,17 @@ public class RealManager implements AppManager {
 
 	@Override
 	public ArrayList<ThemeDTO> getThemes() {
-		return manager.getAllThemes();
+		
+		ArrayList<ThemeDTO> list = manager.getAllThemes();
+		list.sort(new Comparator<ThemeDTO>()
+        {
+            public int compare(ThemeDTO f1, ThemeDTO f2)
+            {
+                return f1.toString().compareTo(f2.toString());
+            }        
+        });
+		
+		return list;//;manager.getAllThemes();
 	}
 
 	@Override

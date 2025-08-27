@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import quizlogic.AppManager;
@@ -69,7 +70,7 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 		}
 		initPanels();
 		addPanels();
-		
+
 	}
 
 	/**
@@ -144,8 +145,24 @@ public class ThemeMainPanel extends JPanel implements ThemeActionDelegate, Theme
 	@Override
 	public void saveTheme() {
 		ThemeDTO theme = panelThemeEdit.getEditedTheme();
+
+		if (theme.getTitle() == null || theme.getTitle().trim().isEmpty()) {
+			JOptionPane.showConfirmDialog(this, "Geben Sie mindestens den Titel an", "",
+					JOptionPane.CANCEL_OPTION);
+			return;
+		}
+
+		if (theme.getText() == null || theme.getText().trim().isEmpty()) {
+			int ja = JOptionPane.showConfirmDialog(this,
+					"Möchten Sie wirklich nur den Titel speichern?", "",
+					JOptionPane.OK_CANCEL_OPTION);
+			System.out.println(ja);
+			if (ja != 0) {
+				return;
+			}
+		}
 		String msg = manager.saveTheme(theme);
-		refreschPanelsWith(msg, theme, true);
+		panelActions.showMessage(msg);
 
 	}
 

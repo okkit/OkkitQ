@@ -8,6 +8,7 @@ import quizlogic.dto.AnswerDTO;
 import quizlogic.dto.QuestionDTO;
 
 public class QuestionDAO extends SerializableDAO {
+	
 
 	private String title;
 	private String text;
@@ -31,6 +32,16 @@ public class QuestionDAO extends SerializableDAO {
 		dto.setTitle(title);
 		dto.setText(text);
 		return dto;
+	}
+	
+	
+
+	public ArrayList<AnswerDAO> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(ArrayList<AnswerDAO> answers) {
+		this.answers = answers;
 	}
 
 	public String getTitle() {
